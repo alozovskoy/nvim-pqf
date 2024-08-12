@@ -69,6 +69,10 @@ require('pqf').setup({
 
   -- Prefix to use for truncated filenames.
   filename_truncate_prefix = '[...]',
+
+  -- By default column numbers will be shown.
+  -- When this is true, only line numbers will be shown
+  hide_column_numbers = false,
 })
 ```
 

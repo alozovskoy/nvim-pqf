@@ -13,6 +13,7 @@ local namespace = api.nvim_create_namespace('pqf')
 local show_multiple_lines = false
 local max_filename_length = 0
 local filename_truncate_prefix = '[...]'
+local hide_column_numbers = false
 
 local function pad_right(string, pad_to)
   local new = string
@@ -119,7 +120,7 @@ function M.format(info)
 
         -- Column numbers without line numbers make no sense, and may confuse
         -- the user into thinking they are actually line numbers.
-        if raw.col and raw.col > 0 then
+        if not hide_column_numbers and raw.col and raw.col > 0 then
           local col = raw.col
 
           if raw.end_col and raw.end_col > 0 and raw.end_col ~= col then
@@ -236,6 +237,10 @@ function M.setup(opts)
 
   if opts.show_multiple_lines then
     show_multiple_lines = true
+  end
+
+  if opts.hide_column_numbers then
+    hide_column_numbers = true
   end
 
   if opts.max_filename_length then
